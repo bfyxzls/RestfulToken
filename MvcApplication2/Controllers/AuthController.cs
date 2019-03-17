@@ -1,5 +1,5 @@
 ﻿using MvcApplication2.Models;
-using MvcApplication2.Repository;
+using MvcApplication2.Service;
 using MvcApplication2.Utils;
 using System;
 using System.Collections.Generic;
@@ -17,18 +17,15 @@ namespace MvcApplication2.Controllers
     [AllowAnonymousAttribute]
     public class AuthController : ApiController
     {
-        IUserInfoRepository userInfoRepository = new UserInfoRepository();
-        ICache cache = new RuntimeCache();
+        IUserInfoService userInfoRepository = new DefaultUserInfoService();
 
         [HttpGet]
         public string Login(string username, string password)
         {
             UserInfo user = userInfoRepository.ValidateByNamePasswword(username, password);
             #region 生成token并返回
-            string token = Guid.NewGuid().ToString();
-            cache.Put(token, user.Username, 24 * 60);//超时1天
+            return TokenHelper.GeneratorToken(user);
             #endregion
-            return token;
         }
 
 

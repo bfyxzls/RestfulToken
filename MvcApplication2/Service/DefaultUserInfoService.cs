@@ -4,15 +4,15 @@ using System.Linq;
 using System.Web;
 using MvcApplication2.Models;
 
-namespace MvcApplication2.Repository
+namespace MvcApplication2.Service
 {
     /// <summary>
     /// 仓储实现
     /// </summary>
-    public class UserInfoRepository : IUserInfoRepository
+    public class DefaultUserInfoService : IUserInfoService
     {
         static List<UserInfo> dbUserInfos = new List<UserInfo>();
-        static UserInfoRepository()
+        static DefaultUserInfoService()
         {
             dbUserInfos.Add(new UserInfo { Id = 1, Username = "zzl", Password = "123" });
         }

@@ -1,5 +1,5 @@
 ﻿using MvcApplication2.Models;
-using MvcApplication2.Repository;
+using MvcApplication2.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace MvcApplication2.Controllers
     /// </summary>
     public class UserController : ApiController
     {
-        IUserInfoRepository userInfoRepository = new UserInfoRepository();
+        IUserInfoService userInfoRepository = new DefaultUserInfoService();
         [HttpGet]
         public List<UserInfo> getUser()
         {

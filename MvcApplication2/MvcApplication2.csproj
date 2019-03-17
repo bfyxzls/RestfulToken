@@ -142,8 +142,8 @@
       <DependentUpon>MODEL.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\IUserInfoRepository.cs" />
-    <Compile Include="Repository\UserInfoRepository.cs" />
+    <Compile Include="Service\IUserInfoService.cs" />
+    <Compile Include="Service\DefaultUserInfoService.cs" />
     <Compile Include="Utils\ICache.cs" />
     <Compile Include="Utils\RuntimeCache.cs" />
     <Compile Include="Utils\TokenHelper.cs" />

@@ -1,4 +1,5 @@
-﻿using MvcApplication2.Utils;
+﻿using MvcApplication2.Service;
+using MvcApplication2.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -16,8 +17,10 @@ namespace MvcApplication2.Filters
     /// </summary>
     public class AuthTokenFilter : ActionFilterAttribute
     {
-   
+
         ICache cache = new RuntimeCache();
+        IUserInfoService userInfoService = new DefaultUserInfoService();
+
         /// <summary>
         /// 方法拦截
         /// </summary>
@@ -42,6 +45,8 @@ namespace MvcApplication2.Filters
             var coll = new NameValueCollection(request.QueryString);
             coll.Add(request.Form);
             #endregion
+
+            #region token校验
             // 获取token，注意它的前缀约定
             string token = request.Headers[TokenHelper.HEADER_PREFIX] ?? coll.Get(TokenHelper.HEADER_PREFIX);
 
@@ -77,6 +82,7 @@ namespace MvcApplication2.Filters
                 }
 
             }
+            #endregion
 
             // 如果token正确，就去渲染对应的方法
             base.OnActionExecuting(actionContext);
