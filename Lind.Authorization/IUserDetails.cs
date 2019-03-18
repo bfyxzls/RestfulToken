@@ -6,7 +6,17 @@ namespace Lind.Authorization
     /// </summary>
 	public interface IUserDetails
     {
+        /// <summary>
+        /// 用户名
+        /// </summary>
 		string Username { get; set; }
+        /// <summary>
+        /// 密码
+        /// </summary>
 		string Password { get; set; }
+        /// <summary>
+        /// 用户是否锁定
+        /// </summary>
+        bool IsLock { get; set; }
     }
 }

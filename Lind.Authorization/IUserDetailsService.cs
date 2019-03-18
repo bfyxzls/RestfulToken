@@ -6,6 +6,11 @@ namespace Lind.Authorization
     /// </summary>
 	public interface IUserDetailsService
 	{
-		IUserDetails LoadUserByUsername(String username);
+        /// <summary>
+        /// 通过名称获取用户信息
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+		IUserDetails LoadUserByUsername(string username);
 	}
 }
