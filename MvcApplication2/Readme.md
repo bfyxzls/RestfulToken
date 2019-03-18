@@ -15,7 +15,7 @@
 ```
 这时，
 ```
-/api/auth?username=zzl&password=123
+/auth/login?username=zzl&password=123
 ```
 这时，登录成功后，返回授权的token码，如下
 ```
@@ -23,7 +23,7 @@
 ```
 我们再去访问用户资源，这时我们把toke带上，你可以用postman这些工具 去测试 ，也可以 直接 在浏览器上测试 
 ```
-/api/user?Authorization=Bearer c947addf-b343-497e-84a8-6dc6c1352155
+/user/getuser?Authorization=Bearer c947addf-b343-497e-84a8-6dc6c1352155
 ``
 注意Bearer和token之间有个空格，这是一种规范，我们 应该遵守。
 再看一下测试的结果

@@ -8,26 +8,31 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Caching;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace MvcApplication2.Controllers
 {
-    /// <summary>
-    /// 授权控制器，AllowAnonymousAttribute表示可以匿名访问，不需要token
-    /// </summary>
-    [AllowAnonymousAttribute]
-    public class AuthController : ApiController
-    {
-        IUserInfoService userInfoRepository = new DefaultUserInfoService();
+	/// <summary>
+	/// 授权控制器，AllowAnonymousAttribute表示可以匿名访问，不需要token
+	/// </summary>
+	public class AuthController : Controller
+	{
+		IUserInfoService userInfoRepository;
 
-        [HttpGet]
-        public string Login(string username, string password)
-        {
-            UserInfo user = userInfoRepository.ValidateByNamePasswword(username, password);
-            #region 生成token并返回
-            return TokenHelper.GeneratorToken(user);
-            #endregion
-        }
+		public AuthController(IUserInfoService userInfoRepository)
+		{
+			this.userInfoRepository = userInfoRepository;
+		}
+
+		[System.Web.Mvc.AllowAnonymousAttribute]
+		public string Login(string username, string password)
+		{
+			UserInfo user = userInfoRepository.ValidateByNamePasswword(username, password);
+			#region 生成token并返回
+			return TokenHelper.GeneratorToken(user);
+			#endregion
+		}
 
 
-    }
+	}
 }

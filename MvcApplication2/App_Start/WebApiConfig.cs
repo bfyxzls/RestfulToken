@@ -17,8 +17,6 @@ namespace MvcApplication2
                 defaults: new { controller = "user", id = RouteParameter.Optional }
             );
 
-            //授权过滤器
-            config.Filters.Add(new AuthTokenFilter());
             config.Formatters.Clear();
             config.Formatters.Add(new JsonMediaTypeFormatter());
         }

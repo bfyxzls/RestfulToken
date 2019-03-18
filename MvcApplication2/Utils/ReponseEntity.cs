@@ -7,7 +7,7 @@ namespace MvcApplication2.Utils
 	/// <summary>
 	/// api统一返回封装
 	/// </summary>
-	public class ReponseEntity<T> where T : class
+	public class ReponseEntity
 	{
 		/// <summary>
 		/// 分页参数
@@ -39,7 +39,7 @@ namespace MvcApplication2.Utils
 		/// 数据对象
 		/// </summary>
 		/// <value>The data.</value>
-		public T Data { get; set; }
+		public Object Data { get; set; }
 		/// <summary>
 		/// 状态码
 		/// </summary>
@@ -61,9 +61,9 @@ namespace MvcApplication2.Utils
 		/// </summary>
 		/// <returns>The ok.</returns>
 		/// <param name="message">Message.</param>
-		public ReponseEntity<T> Ok(string message)
+		public static ReponseEntity Ok(string message)
 		{
-			return new ReponseEntity<T>
+			return new ReponseEntity
 			{
 				Message = message,
 				Code = HttpStatusCode.OK
@@ -75,9 +75,9 @@ namespace MvcApplication2.Utils
 		/// </summary>
 		/// <returns>The ok.</returns>
 		/// <param name="data">Data.</param>
-		public ReponseEntity<T> Ok(T data, PageEntity pageEntity = null)
+		public static ReponseEntity Ok(Object data, PageEntity pageEntity = null)
 		{
-			return new ReponseEntity<T>
+			return new ReponseEntity
 			{
 				Message = "成功",
 				Code = HttpStatusCode.OK,
@@ -92,9 +92,9 @@ namespace MvcApplication2.Utils
 		/// <returns>The ok.</returns>
 		/// <param name="code">Code.</param>
 		/// <param name="message">Message.</param>
-		public ReponseEntity<T> Ok(HttpStatusCode code, string message)
+		public static ReponseEntity Ok(HttpStatusCode code, string message)
 		{
-			return new ReponseEntity<T>
+			return new ReponseEntity
 			{
 				Message = message,
 				Code = code,
@@ -107,9 +107,9 @@ namespace MvcApplication2.Utils
 		/// </summary>
 		/// <returns>The error.</returns>
 		/// <param name="errors">Errors.</param>
-		public ReponseEntity<T> Error(List<string> errors)
+		public static ReponseEntity Error(List<string> errors)
 		{
-			return new ReponseEntity<T>
+			return new ReponseEntity
 			{
 				Message = "操作失败",
 				Code = HttpStatusCode.InternalServerError,
