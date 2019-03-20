@@ -5,7 +5,7 @@ namespace Lind.Authorization
     /// 授权处理程序
     /// </summary>
     public abstract class BaseUserDetailsAuthenticationProvider
-    {
+	{
         IUserDetailsService userDetailsService;
         public BaseUserDetailsAuthenticationProvider(IUserDetailsService userDetailsService)
         {
@@ -45,5 +45,15 @@ namespace Lind.Authorization
             }
         }
 
-    }
+        /// <summary>
+        /// 返回授权方式，在header头中的key
+        /// </summary>
+        /// <returns>The header prefix.</returns>
+		public virtual string getHeaderPrefix()
+		{
+			return "Authorization";
+		}
+
+
+	}
 }
