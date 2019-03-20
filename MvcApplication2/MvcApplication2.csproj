@@ -148,6 +148,8 @@
     <Compile Include="Utils\RuntimeCache.cs" />
     <Compile Include="Utils\TokenHelper.cs" />
     <Compile Include="Utils\ReponseEntity.cs" />
+    <Compile Include="Filters\ExceptionErrorFilter.cs" />
+    <Compile Include="Filters\CorsFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

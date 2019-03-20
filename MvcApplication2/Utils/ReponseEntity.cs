@@ -55,6 +55,11 @@ namespace MvcApplication2.Utils
 		/// </summary>
 		/// <value>The errors.</value>
 		public List<string> Errors { get; set; }
+		/// <summary>
+		/// 错误堆
+		/// </summary>
+		/// <value>The stack trace.</value>
+		public string StackTrace { get; set; }
 
 		/// <summary>
 		/// 成功消息
@@ -103,7 +108,7 @@ namespace MvcApplication2.Utils
 		}
 
 		/// <summary>
-		/// 错误返回
+		/// 错误返回，指400的客户端引起的
 		/// </summary>
 		/// <returns>The error.</returns>
 		/// <param name="errors">Errors.</param>
@@ -112,9 +117,24 @@ namespace MvcApplication2.Utils
 			return new ReponseEntity
 			{
 				Message = "操作失败",
-				Code = HttpStatusCode.InternalServerError,
+				Code = HttpStatusCode.BadRequest,
 				Data = null,
 				Errors = errors
+			};
+		}
+
+		/// <summary>
+		/// 错误返回，指500的服务端引起的
+		/// </summary>
+		/// <returns>The error.</returns>
+		/// <param name="ex">Errors.</param>
+		public static ReponseEntity ThrowError(Exception ex)
+		{
+			return new ReponseEntity
+			{
+				Message = ex.Message,
+				Code = HttpStatusCode.InternalServerError,
+				StackTrace = ex.StackTrace
 			};
 		}
 	}
