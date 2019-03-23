@@ -33,6 +33,5 @@ namespace MvcApplication2.Controllers
 			#endregion
 		}
 
-
 	}
 }

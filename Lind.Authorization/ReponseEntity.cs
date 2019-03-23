@@ -39,7 +39,7 @@ namespace Lind.Authorization
 		/// 数据对象
 		/// </summary>
 		/// <value>The data.</value>
-		public Object Data { get; set; }
+		public object Data { get; set; }
 		/// <summary>
 		/// 状态码
 		/// </summary>

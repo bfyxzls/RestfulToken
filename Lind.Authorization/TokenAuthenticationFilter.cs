@@ -7,16 +7,19 @@ using System.Web.Mvc;
 
 namespace Lind.Authorization
 {
+    /// <summary>
+    /// 基于token的授权机制
+    /// </summary>
     public class TokenAuthenticationFilter : ActionFilterAttribute
     {
-		IUserDetailsAuthenticationProvider userDetailsAuthenticationProvider;
-		public TokenAuthenticationFilter(IUserDetailsAuthenticationProvider userDetailsAuthenticationProvider)
-		{
-			this.userDetailsAuthenticationProvider = userDetailsAuthenticationProvider;
-		}
-		public override void OnActionExecuting(ActionExecutingContext filterContext)
+        IUserDetailsAuthenticationProvider userDetailsAuthenticationProvider;
+        public TokenAuthenticationFilter(IUserDetailsAuthenticationProvider userDetailsAuthenticationProvider)
         {
-			#region 例外
+            this.userDetailsAuthenticationProvider = userDetailsAuthenticationProvider;
+        }
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            #region 例外
             bool skipAuthorization = filterContext.ActionDescriptor.IsDefined(
                 typeof(AllowAnonymousAttribute), inherit: true)
                  ||
@@ -27,43 +30,42 @@ namespace Lind.Authorization
                 return;
             #endregion
 
-			#region 初始化
+            #region 初始化
             //获取传统context
             var context = filterContext.HttpContext;
-            var request = context.Request;//定义传统request对象
-                                          // 校验码只从Url地址后取，不从表单取
+            //定义传统request对象
+            var request = context.Request;
+            // 校验码只从Url地址后取，不从表单取
             var coll = new NameValueCollection(request.QueryString);
             coll.Add(request.Form);
             #endregion
 
             #region token校验
             // 获取token，注意它的前缀约定
-			string token = request.Headers[userDetailsAuthenticationProvider.getHeaderPrefix()] 
-			                      ?? coll.Get(userDetailsAuthenticationProvider.getHeaderPrefix());
+            string token = request.Headers[userDetailsAuthenticationProvider.getHeaderPrefix()]
+                                  ?? coll.Get(userDetailsAuthenticationProvider.getHeaderPrefix());
 
             // 如果没有传token就返回401，没有授权
             if (token == null)
             {
-				context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(
+                context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(
                     ReponseEntity.Ok(System.Net.HttpStatusCode.Unauthorized, "user Unauthorized 401")));
-				context.Response.End();
-
-
+                context.Response.End();
             }
             else
             {
                 // 如果传了token，但是token过期，或者不正确，就返回403，权限不足
-				if (!userDetailsAuthenticationProvider.validateAuthentication(token))
+                if (!userDetailsAuthenticationProvider.validateAuthentication(token))
                 {
-					context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(
+                    context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(
                         ReponseEntity.Ok(System.Net.HttpStatusCode.Forbidden, "user Forbidden 403")));
-					context.Response.End();
-
+                    context.Response.End();
                 }
 
             }
             #endregion
-			base.OnActionExecuting(filterContext);
+
+            base.OnActionExecuting(filterContext);
         }
     }
 }
