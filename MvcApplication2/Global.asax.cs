@@ -8,7 +8,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
+using Autofac.Extras.DynamicProxy2;
 using Autofac.Integration.Mvc;
+using Lind.DDD.Caching;
 using MvcApplication2.Service;
 
 namespace MvcApplication2
@@ -21,8 +23,12 @@ namespace MvcApplication2
         {
             #region 注册组件
             var builder = new ContainerBuilder();
+
+			builder.RegisterType<CachingBehavior>();
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterType<DefaultUserInfoService>().As<IUserInfoService>().InstancePerHttpRequest();
+			builder.RegisterType<DefaultUserInfoService>().As<IUserInfoService>()
+			       .InstancePerHttpRequest().EnableClassInterceptors();
+       
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             #endregion

@@ -14,5 +14,6 @@ namespace MvcApplication2.Service
         UserInfo GetUserInfoByName(string name);
         UserInfo ValidateByNamePasswword(string name, string password);
         List<UserInfo> GetUserInfos();
+		DateTime GetTime();
     }
 }
