@@ -18,5 +18,7 @@ namespace MvcApplication2.Service
         List<UserInfo> GetUserInfos();
 		[Caching(CachingMethod.Get)]
 		DateTime GetTime();
+		[Caching(CachingMethod.Put,"GetTime")]
+		void SetTime();
     }
 }

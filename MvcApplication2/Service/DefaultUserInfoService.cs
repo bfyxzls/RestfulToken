@@ -20,7 +20,7 @@ namespace MvcApplication2.Service
 
 		public DateTime GetTime()
 		{
-			return DateTime.Now;
+			return dateTime;
 		}
 
 		public UserInfo GetUserInfoByName(string name)
@@ -34,6 +34,13 @@ namespace MvcApplication2.Service
 		public List<UserInfo> GetUserInfos()
 		{
 			return dbUserInfos;
+		}
+		DateTime dateTime = DateTime.Now;
+		public void SetTime()
+		{
+			//设置时间对象
+			dateTime = DateTime.Now;
+			Console.WriteLine("更新缓存");
 		}
 
 		public UserInfo ValidateByNamePasswword(string name, string password)

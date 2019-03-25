@@ -14,7 +14,7 @@ namespace MvcApplication2.Controllers
 	{
 		IUserInfoService userInfoService;
 		ILogger logger;
-		public TestController(IUserInfoService userInfoService,ILogger logger)
+		public TestController(IUserInfoService userInfoService, ILogger logger)
 		{
 			this.userInfoService = userInfoService;
 			this.logger = logger;
@@ -32,13 +32,13 @@ namespace MvcApplication2.Controllers
 
 		public DateTime GetTime()
 		{
-            logger.WriteLine("hello");
 
 			return userInfoService.GetTime();
 		}
 
-		[Caching(CachingMethod.Put,"TestController.GetTime")]
-		public String SetTime(){
+		public String SetTime()
+		{
+			userInfoService.SetTime();
 			return "Success";
 		}
 	}
