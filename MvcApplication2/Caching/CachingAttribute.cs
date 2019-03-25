@@ -5,7 +5,7 @@ namespace Lind.DDD.Caching
     /// <summary>
     /// 表示由此特性所描述的方法，能够获得来自Microsoft.Practices.EnterpriseLibrary.Caching基础结构层所提供的缓存功能。
     /// </summary>
-	[AttributeUsage(AttributeTargets.All, AllowMultiple=false, Inherited=false)]
+	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public class CachingAttribute : Attribute
     {
         #region Ctor
