@@ -125,6 +125,7 @@ namespace Lind.DDD.Caching
 		/// <param name="input">input.</param>
 		public void Intercept(IInvocation input)
 		{
+			Console.WriteLine("Caching Intercept");
 			var method = input.Method;
 			//键值前缀
 			string prefix = cacheProjectName + "_";

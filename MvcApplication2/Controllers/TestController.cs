@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Lind.DDD.Caching;
+using MvcApplication2.DITest;
 using MvcApplication2.Service;
 
 namespace MvcApplication2.Controllers
@@ -12,9 +13,11 @@ namespace MvcApplication2.Controllers
 	public class TestController : Controller
 	{
 		IUserInfoService userInfoService;
-		public TestController(IUserInfoService userInfoService)
+		ILogger logger;
+		public TestController(IUserInfoService userInfoService,ILogger logger)
 		{
 			this.userInfoService = userInfoService;
+			this.logger = logger;
 		}
 		//
 		// GET: /Test/
@@ -29,6 +32,8 @@ namespace MvcApplication2.Controllers
 
 		public DateTime GetTime()
 		{
+            logger.WriteLine("hello");
+
 			return userInfoService.GetTime();
 		}
 

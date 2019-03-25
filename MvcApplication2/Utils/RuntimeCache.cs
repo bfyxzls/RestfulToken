@@ -11,7 +11,6 @@ namespace MvcApplication2.Utils
 	public class RuntimeCache : ICache
 	{
 		readonly static System.Web.Caching.Cache httpRuntimeCache = System.Web.HttpRuntime.Cache;
-		readonly static int _expireMinutes = 60;
 
 		#region ICache 成员
 

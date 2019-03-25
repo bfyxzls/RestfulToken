@@ -18,7 +18,6 @@ namespace MvcApplication2.Service
 			dbUserInfos.Add(new UserInfo { Id = 1, Username = "zzl", Password = "123" });
 		}
 
-		[Caching(CachingMethod.Get)]
 		public DateTime GetTime()
 		{
 			return DateTime.Now;

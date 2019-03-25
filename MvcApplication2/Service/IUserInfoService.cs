@@ -1,4 +1,6 @@
-﻿using MvcApplication2.Models;
+﻿using Autofac.Extras.DynamicProxy2;
+using Lind.DDD.Caching;
+using MvcApplication2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace MvcApplication2.Service
         UserInfo GetUserInfoByName(string name);
         UserInfo ValidateByNamePasswword(string name, string password);
         List<UserInfo> GetUserInfos();
+		[Caching(CachingMethod.Get)]
 		DateTime GetTime();
     }
 }
