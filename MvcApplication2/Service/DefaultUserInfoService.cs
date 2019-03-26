@@ -50,5 +50,10 @@ namespace MvcApplication2.Service
 				throw new HttpException("用户名密码不匹配");
 			return user;
 		}
+
+		public DateTime GetTime(int id)
+		{
+			return dateTime;
+		}
 	}
 }

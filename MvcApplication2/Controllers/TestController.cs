@@ -35,6 +35,11 @@ namespace MvcApplication2.Controllers
 			return userInfoService.GetTime();
 		}
 
+		public DateTime GetTimeById()
+        {
+			return userInfoService.GetTime(1);
+        }
+
 		public String SetTime()
 		{
 			userInfoService.SetTime();

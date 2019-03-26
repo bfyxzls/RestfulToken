@@ -20,5 +20,7 @@ namespace MvcApplication2.Service
 		DateTime GetTime();
 		[Caching(CachingMethod.Remove, value = "time")]
 		void SetTime();
+		[Caching(CachingMethod.Get, value = "time")]
+        DateTime GetTime(int id);
 	}
 }
