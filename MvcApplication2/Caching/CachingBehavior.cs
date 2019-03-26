@@ -129,18 +129,9 @@ namespace Lind.DDD.Caching
 						{
 							input.Proceed();
 							CacheManager.Instance.Add(key, valKey, input.ReturnValue);
-
 						}
 						break;
-
-					case CachingMethod.Put:
-
-						input.Proceed();
-						CacheManager.Instance.Put(key, valKey, input.ReturnValue);
-						break;
-
 					case CachingMethod.Remove:
-
 						CacheManager.Instance.Remove(key, valKey);
 						break;
 

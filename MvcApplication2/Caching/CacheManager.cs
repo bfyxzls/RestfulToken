@@ -23,6 +23,7 @@ namespace Lind.DDD.Caching
 		/// </summary>
 		private CacheManager()
 		{
+			// 缓存的持久化可以自定义，默认是runtime，可以自己扩展redis存储
 			string strategyName = System.Configuration.ConfigurationManager.AppSettings["cacheType"] ?? "EntLib";
 
 			switch (strategyName)
