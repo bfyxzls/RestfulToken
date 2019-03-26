@@ -8,17 +8,17 @@ using System.Web;
 
 namespace MvcApplication2.Service
 {
-    /// <summary>
-    /// 用户仓储
-    /// </summary>
-    public interface IUserInfoService
-    {
-        UserInfo GetUserInfoByName(string name);
-        UserInfo ValidateByNamePasswword(string name, string password);
-        List<UserInfo> GetUserInfos();
-		[Caching(CachingMethod.Get)]
+	/// <summary>
+	/// 用户仓储
+	/// </summary>
+	public interface IUserInfoService
+	{
+		UserInfo GetUserInfoByName(string name);
+		UserInfo ValidateByNamePasswword(string name, string password);
+		List<UserInfo> GetUserInfos();
+		[Caching(CachingMethod.Get, value = "time")]
 		DateTime GetTime();
-		[Caching(CachingMethod.Put,"GetTime")]
+		[Caching(CachingMethod.Remove, value = "time")]
 		void SetTime();
-    }
+	}
 }

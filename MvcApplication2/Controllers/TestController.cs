@@ -32,7 +32,6 @@ namespace MvcApplication2.Controllers
 
 		public DateTime GetTime()
 		{
-
 			return userInfoService.GetTime();
 		}
 
