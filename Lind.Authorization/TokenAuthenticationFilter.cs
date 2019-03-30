@@ -15,16 +15,20 @@ namespace Lind.Authorization
         IUserDetailsAuthenticationProvider userDetailsAuthenticationProvider;
         public TokenAuthenticationFilter(IUserDetailsAuthenticationProvider userDetailsAuthenticationProvider)
         {
+            if (userDetailsAuthenticationProvider == null)
+            {
+                throw new ArgumentException("你需要注入IUserDetailsAuthenticationProvider的实例");
+            }
             this.userDetailsAuthenticationProvider = userDetailsAuthenticationProvider;
         }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             #region 例外
             bool skipAuthorization = filterContext.ActionDescriptor.IsDefined(
-                typeof(AllowAnonymousAttribute), inherit: true)
+                typeof(AllowAttribute), inherit: true)
                  ||
                 filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(
-                typeof(AllowAnonymousAttribute), inherit: true);
+                typeof(AllowAttribute), inherit: true);
 
             if (skipAuthorization)
                 return;
@@ -42,8 +46,8 @@ namespace Lind.Authorization
 
             #region token校验
             // 获取token，注意它的前缀约定
-            string token = request.Headers[userDetailsAuthenticationProvider.getHeaderPrefix()]
-                                  ?? coll.Get(userDetailsAuthenticationProvider.getHeaderPrefix());
+            string token = request.Headers[userDetailsAuthenticationProvider.GetHeaderPrefix()]
+                                  ?? coll.Get(userDetailsAuthenticationProvider.GetHeaderPrefix());
 
             // 如果没有传token就返回401，没有授权
             if (token == null)
@@ -55,7 +59,7 @@ namespace Lind.Authorization
             else
             {
                 // 如果传了token，但是token过期，或者不正确，就返回403，权限不足
-                if (!userDetailsAuthenticationProvider.validateAuthentication(token))
+                if (!userDetailsAuthenticationProvider.ValidateAuthentication(token))
                 {
                     context.Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(
                         ReponseEntity.Ok(System.Net.HttpStatusCode.Forbidden, "user Forbidden 403")));

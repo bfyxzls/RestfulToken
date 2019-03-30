@@ -1,4 +1,5 @@
-﻿using MvcApplication2.Models;
+﻿using Lind.Authorization;
+using MvcApplication2.Models;
 using MvcApplication2.Service;
 using MvcApplication2.Utils;
 using System;
@@ -18,20 +19,22 @@ namespace MvcApplication2.Controllers
 	public class AuthController : Controller
 	{
 		IUserInfoService userInfoRepository;
-
-		public AuthController(IUserInfoService userInfoRepository)
+        IUserDetailsService userDetailsService;
+		public AuthController(IUserInfoService userInfoRepository, IUserDetailsService userDetailsService)
 		{
 			this.userInfoRepository = userInfoRepository;
+            this.userDetailsService = userDetailsService;
 		}
 
-		[System.Web.Mvc.AllowAnonymousAttribute]
+		[AllowAttribute]
 		public string Login(string username, string password)
 		{
 			UserInfo user = userInfoRepository.ValidateByNamePasswword(username, password);
 			#region 生成token并返回
-			return TokenHelper.GeneratorToken(user);
-			#endregion
-		}
+			return userDetailsService.GenerateToken(user);
+            #endregion
+
+        }
 
 	}
 }

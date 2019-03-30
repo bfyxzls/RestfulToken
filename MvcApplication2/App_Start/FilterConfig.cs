@@ -10,7 +10,6 @@ namespace MvcApplication2
 		{
 			filters.Add(new ExceptionErrorFilter());
 			filters.Add(new CorsFilter());
-			filters.Add(new AuthTokenFilter());
 		}
 	}
 }

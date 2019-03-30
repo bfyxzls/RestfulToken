@@ -151,6 +151,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\IUserInfoService.cs" />
     <Compile Include="Service\DefaultUserInfoService.cs" />
+    <Compile Include="Service\UserService.cs" />
     <Compile Include="Utils\ICache.cs" />
     <Compile Include="Utils\RuntimeCache.cs" />
     <Compile Include="Utils\TokenHelper.cs" />
@@ -181,8 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Caching\" />
-    <Folder Include="DITest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -213,6 +212,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lind.Authorization\Lind.Authorization.csproj">
+      <Project>{32de8b93-21f9-41b3-aa52-2133b406564d}</Project>
+      <Name>Lind.Authorization</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
