@@ -31,6 +31,7 @@ namespace MvcApplication2
             builder.RegisterType<UserService>().As<IUserDetailsService>();
             builder.RegisterType<TokenUserDetailsAuthenticationProvider>().As<IUserDetailsAuthenticationProvider>();
             builder.RegisterType<TokenAuthenticationFilter>().SingleInstance();
+			builder.RegisterFilterProvider();
 
             builder.RegisterType<CachingBehavior>();
             builder.RegisterType<DefaultUserInfoService>()
@@ -47,7 +48,6 @@ namespace MvcApplication2
                    .EnableInterfaceInterceptors();
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterFilterProvider();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
