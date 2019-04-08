@@ -55,5 +55,11 @@ namespace MvcApplication2.Service
 		{
 			return dateTime;
 		}
+        
+		void IUserInfoService.SetTimeById(int id, string name)
+		{
+			dateTime = DateTime.Now;
+            Console.WriteLine("更新缓存");
+		}
 	}
 }

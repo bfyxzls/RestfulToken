@@ -20,17 +20,31 @@ namespace Lind.DDD.Caching
 		/// </summary>
 		static readonly string cacheProjectName = ConfigurationManager.AppSettings["CacheProjectName"] ?? "DataSetCache";
 		static readonly string splitStr = "_";
+
 		/// <summary>
 		/// 获取与某一特定参数值相关的键名。
 		/// </summary>
 		private string GetValueKey(CachingAttribute cachingAttribute, IInvocation input)
 		{
-			object[] inputArguments = input.Arguments;
-			ParameterInfo[] parameters = input.Method.GetParameters();
-			if (inputArguments != null && inputArguments.Length > 0)
+			List<object> inputArguments = input.Arguments.ToList();
+
+			List<ParameterInfo> parameters = input.Method.GetParameters().ToList();
+			if (cachingAttribute.paramsCacheKey != null)
+			{
+				for (int i = 0; i < parameters.Count; i++)
+				{
+					if (!cachingAttribute.paramsCacheKey.Contains(parameters[i].Name))
+					{
+						parameters.RemoveAt(i);
+						inputArguments.RemoveAt(i);
+					}
+				}
+               
+			}
+			if (inputArguments != null && inputArguments.Any())
 			{
 				var sb = new StringBuilder();
-				for (int i = 0; i < input.Arguments.Length; i++)
+				for (int i = 0; i < inputArguments.Count; i++)
 				{
 					if (input.Arguments[i] == null)
 						break;
@@ -67,20 +81,13 @@ namespace Lind.DDD.Caching
 						var obj = input.Arguments[i];
 						Type t = obj.GetType();
 						var result = new StringBuilder();
-						#region 提取类中的字段和属性
+						#region 提取类中的字段
 						result.Append(parameters[i].Name).Append(splitStr);
 						foreach (var member in t.GetProperties())//公开属性
 						{
 							result.Append(member.Name)
 								  .Append(splitStr)
 								  .Append(t.GetProperty(member.Name).GetValue(obj, null))
-								  .Append(splitStr);
-						}
-						foreach (var member in t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))//私有和公用字段
-						{
-							result.Append(member.Name)
-								  .Append(splitStr)
-								  .Append(t.GetField(member.Name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).GetValue(obj))
 								  .Append(splitStr);
 						}
 						#endregion
@@ -91,7 +98,7 @@ namespace Lind.DDD.Caching
 						sb.Append(parameters[i].Name + splitStr + inputArguments[i].ToString());
 					}
 
-					if (i != inputArguments.Length - 1)
+					if (i != inputArguments.Count - 1)
 						sb.Append(splitStr);
 				}
 				return sb.ToString();

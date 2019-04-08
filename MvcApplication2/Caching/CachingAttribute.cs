@@ -3,7 +3,7 @@
 namespace Lind.DDD.Caching
 {
 	/// <summary>
-	/// 表示由此特性所描述的方法，能够获得来自Microsoft.Practices.EnterpriseLibrary.Caching基础结构层所提供的缓存功能。
+	/// 方法缓存功能特性.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
 	public class CachingAttribute : Attribute
@@ -36,7 +36,7 @@ namespace Lind.DDD.Caching
 		/// </summary>
 		public CachingMethod Method { get; set; }
 		/// <summary>
-		/// 获取或设置与当前缓存方式相关的方法名称。注：此参数仅在缓存方式为Remove时起作用。
+		/// 获取或设置与当前缓存方式相关的方法名称。注：此参数仅在缓存方式为Remove时起作用
 		/// </summary>
 		public string value { get; set; }
 		/// <summary>
@@ -44,6 +44,11 @@ namespace Lind.DDD.Caching
 		/// </summary>
 		/// <value><c>true</c> if is all; otherwise, <c>false</c>.</value>
 		public bool isAll { get; set; }
+        /// <summary>
+        /// 根据参数去生成缓存的键值
+        /// </summary>
+        /// <value>The parameter cache.</value>
+		public string[] paramsCacheKey{ get; set; }
 		#endregion
 	}
 }

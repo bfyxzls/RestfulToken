@@ -21,6 +21,8 @@ namespace MvcApplication2.Service
 		[Caching(CachingMethod.Remove, value = "time")]
 		void SetTime();
 		[Caching(CachingMethod.Get, value = "time")]
-        DateTime GetTime(int id);
+		DateTime GetTime(int id);
+		[Caching(CachingMethod.Remove, value = "time", paramsCacheKey = new string[] { "id" })]
+		void SetTimeById(int id, string name);
 	}
 }
