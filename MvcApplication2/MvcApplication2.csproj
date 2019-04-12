@@ -164,6 +164,9 @@
     <Compile Include="Caching\CachingMethod.cs" />
     <Compile Include="DITest\ILogger.cs" />
     <Compile Include="DITest\LoggerInterceptor.cs" />
+    <Compile Include="Filters\DIFilter.cs" />
+    <Compile Include="Service\IProductService.cs" />
+    <Compile Include="Service\ProductService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -217,6 +220,10 @@
     <ProjectReference Include="..\Lind.Authorization\Lind.Authorization.csproj">
       <Project>{32de8b93-21f9-41b3-aa52-2133b406564d}</Project>
       <Name>Lind.Authorization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lind.DI\Lind.DI.csproj">
+      <Project>{D1B50E40-5B70-4C4C-A81E-F11D016C5A73}</Project>
+      <Name>Lind.DI</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

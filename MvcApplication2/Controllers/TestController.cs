@@ -13,12 +13,18 @@ namespace MvcApplication2.Controllers
 	[AllowAttribute]
 	public class TestController : Controller
 	{
+		[Lind.DI.Injection]
+		IProductService productService;
 		IUserInfoService userInfoService;
 		ILogger logger;
 		public TestController(IUserInfoService userInfoService, ILogger logger)
 		{
 			this.userInfoService = userInfoService;
 			this.logger = logger;
+		}
+		public ActionResult DI()
+		{
+			return Content(productService.getProductName());	
 		}
 		//
 		// GET: /Test/
