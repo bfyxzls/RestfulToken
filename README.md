@@ -21,7 +21,7 @@
 事实上，Lind.DI是所有组件的最底层依赖，它实现了对象的注册和注入，类于spring ioc的简约风格更适合当代开发人员，大叔的Lind.DI是以autofac这个ioc容器为基础的，在它上面进行了封装，这也就是拿来主义的思想吧。
 * 统一的注入方式 
 ```
-public class DIFilter : ActionFilterAttribute
+        public class DIFilter : ActionFilterAttribute
 	{
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
@@ -37,7 +37,7 @@ Lind.DI.DIFactory.Init();
 ```
 	[Lind.DI.Component]
 	public class ProductService:IProductService
- {
+        {
 		public string getProductName()
 		{
 			return "ioc for product service.";
@@ -50,6 +50,6 @@ Lind.DI.DIFactory.Init();
 IProductService productService;
 public ActionResult DI()
 {
-			return Content(productService.getProductName());	
+ return Content(productService.getProductName());	
 }
 ```
