@@ -25,7 +25,8 @@ namespace MvcApplication2
     {
         protected void Application_Start()
         {
-            #region 注册组件
+			#region 注册组件
+			Lind.DI.DIFactory.Init();
             var builder = new ContainerBuilder();
             builder.RegisterType<UserInfo>().As<IUserDetails>();
             builder.RegisterType<UserService>().As<IUserDetailsService>();
