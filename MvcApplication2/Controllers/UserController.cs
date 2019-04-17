@@ -10,20 +10,17 @@ using System.Web.Mvc;
 
 namespace MvcApplication2.Controllers
 {
-	/// <summary>
-	/// 用户中心，需要有token才能访问
-	/// </summary>
-	public class UserController : Controller
-	{
-		IUserInfoService userInfoRepository;
-		public UserController(IUserInfoService userInfoRepository)
-		{
-			this.userInfoRepository = userInfoRepository;
-		}
-	
-		public List<UserInfo> getUser()
-		{
-			return userInfoRepository.GetUserInfos();
-		}
-	}
+    /// <summary>
+    /// 用户中心，需要有token才能访问
+    /// </summary>
+    public class UserController : Controller
+    {
+        [Lind.DI.Injection]
+        IUserInfoService userInfoRepository;
+
+        public List<UserInfo> getUser()
+        {
+            return userInfoRepository.GetUserInfos();
+        }
+    }
 }

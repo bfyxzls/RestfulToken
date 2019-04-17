@@ -10,7 +10,7 @@ namespace MvcApplication2
         {
 			//从ioc容器里拿到 filter实例 
 			filters.Add(new DIFilter());
-            filters.Add(DependencyResolver.Current.GetService<Lind.Authorization.TokenAuthenticationFilter>());
+           // filters.Add(DependencyResolver.Current.GetService<Lind.Authorization.TokenAuthenticationFilter>());
             filters.Add(new ExceptionErrorFilter());
 			filters.Add(new CorsFilter());
 		}

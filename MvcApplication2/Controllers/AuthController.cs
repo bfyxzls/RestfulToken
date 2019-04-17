@@ -13,28 +13,26 @@ using System.Web.Mvc;
 
 namespace MvcApplication2.Controllers
 {
-	/// <summary>
-	/// 授权控制器，AllowAnonymousAttribute表示可以匿名访问，不需要token
-	/// </summary>
-	public class AuthController : Controller
-	{
-		IUserInfoService userInfoRepository;
+    /// <summary>
+    /// 授权控制器，AllowAnonymousAttribute表示可以匿名访问，不需要token
+    /// </summary>
+    public class AuthController : Controller
+    {
+        [Lind.DI.Injection]
+        IUserInfoService userInfoRepository;
+        [Lind.DI.Injection]
         IUserDetailsService userDetailsService;
-		public AuthController(IUserInfoService userInfoRepository, IUserDetailsService userDetailsService)
-		{
-			this.userInfoRepository = userInfoRepository;
-            this.userDetailsService = userDetailsService;
-		}
 
-		[AllowAttribute]
-		public string Login(string username, string password)
-		{
-			UserInfo user = userInfoRepository.ValidateByNamePasswword(username, password);
-			#region 生成token并返回
-			return userDetailsService.GenerateToken(user);
+
+        [AllowAttribute]
+        public string Login(string username, string password)
+        {
+            UserInfo user = userInfoRepository.ValidateByNamePasswword(username, password);
+            #region 生成token并返回
+            return userDetailsService.GenerateToken(user);
             #endregion
 
         }
 
-	}
+    }
 }

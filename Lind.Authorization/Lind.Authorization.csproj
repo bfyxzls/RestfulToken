@@ -68,5 +68,11 @@
     <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lind.DI\Lind.DI.csproj">
+      <Project>{d1b50e40-5b70-4c4c-a81e-f11d016c5a73}</Project>
+      <Name>Lind.DI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

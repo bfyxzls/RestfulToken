@@ -4,6 +4,7 @@ namespace Lind.Authorization
     /// <summary>
     /// 授权处理程序
     /// </summary>
+    [Lind.DI.Component]
     public  class TokenUserDetailsAuthenticationProvider:IUserDetailsAuthenticationProvider
 	{
         IUserDetailsService userDetailsService;

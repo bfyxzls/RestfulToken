@@ -27,31 +27,6 @@ namespace MvcApplication2
         {
 			#region 注册组件
 			Lind.DI.DIFactory.Init();
-            var builder = new ContainerBuilder();
-            builder.RegisterType<UserInfo>().As<IUserDetails>();
-            builder.RegisterType<UserService>().As<IUserDetailsService>();
-            builder.RegisterType<TokenUserDetailsAuthenticationProvider>().As<IUserDetailsAuthenticationProvider>();
-            builder.RegisterType<TokenAuthenticationFilter>().SingleInstance();
-			builder.RegisterFilterProvider();
-
-            builder.RegisterType<CachingBehavior>();
-            builder.RegisterType<DefaultUserInfoService>()
-                   .As<IUserInfoService>()
-                   .InstancePerLifetimeScope()
-                   .InterceptedBy(typeof(CachingBehavior))
-                   .EnableInterfaceInterceptors();
-
-            builder.RegisterType<LoggerInterceptor>();
-            builder.RegisterType<DefaultLogger>()
-               .As<ILogger>()
-                   .InstancePerLifetimeScope()
-                   .InterceptedBy(typeof(CachingBehavior))
-                   .EnableInterfaceInterceptors();
-
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-
-            var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             #endregion
 
             AreaRegistration.RegisterAllAreas();

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Builder;
+using Autofac.Extras.DynamicProxy2;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -120,20 +121,49 @@ namespace Lind.DI
         /// <param name="componentAttribute">Component attribute.</param>
         static void registor(ContainerBuilder builder, Type typeImpl, Type type, ComponentAttribute componentAttribute)
         {
+            if (componentAttribute.Intercepted != null)
+            {
+                builder.RegisterType(componentAttribute.Intercepted);
+            }
 
             if (componentAttribute.LifeCycle == LifeCycle.Global)
             {
                 if (componentAttribute.Named != null)
+                {
                     builder.RegisterType(typeImpl).Named(componentAttribute.Named, type).SingleInstance();
+                }
                 else
+                {
                     builder.RegisterType(typeImpl).As(type).SingleInstance();
+                }
+
             }
+
             else if (componentAttribute.LifeCycle == LifeCycle.CurrentScope)
             {
                 if (componentAttribute.Named != null)
-                    builder.RegisterType(typeImpl).Named(componentAttribute.Named, type).InstancePerDependency();
+                {
+                    if (componentAttribute.Intercepted != null)
+                    {
+                        builder.RegisterType(componentAttribute.Intercepted);
+                        builder.RegisterType(typeImpl).Named(componentAttribute.Named, type).InstancePerDependency()
+                            .InterceptedBy(componentAttribute.Intercepted).EnableInterfaceInterceptors();
+                    }
+                    else
+                        builder.RegisterType(typeImpl).Named(componentAttribute.Named, type).InstancePerDependency();
+                }
                 else
-                    builder.RegisterType(typeImpl).As(type).InstancePerDependency();
+                {
+                    if (componentAttribute.Intercepted != null)
+                    {
+                        builder.RegisterType(componentAttribute.Intercepted);
+                        builder.RegisterType(typeImpl).As(type).InstancePerDependency()
+                                .InterceptedBy(componentAttribute.Intercepted).EnableInterfaceInterceptors();
+                    }
+                    else
+                        builder.RegisterType(typeImpl).As(type).InstancePerDependency();
+                }
+
             }
             else
             {

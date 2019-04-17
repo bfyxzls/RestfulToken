@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MvcApplication2.Models;
+using Lind.DDD.Caching;
 
 namespace MvcApplication2.Services
 {
+    [Lind.DI.Component]
     public class UserService : IUserDetailsService
     {
         public string GenerateToken(IUserDetails userDetails)

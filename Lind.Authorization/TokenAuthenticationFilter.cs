@@ -10,6 +10,7 @@ namespace Lind.Authorization
     /// <summary>
     /// 基于token的授权机制
     /// </summary>
+    [Lind.DI.Component]
     public class TokenAuthenticationFilter : ActionFilterAttribute
     {
         IUserDetailsAuthenticationProvider userDetailsAuthenticationProvider;

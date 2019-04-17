@@ -5,6 +5,7 @@ using System.Web;
 
 namespace MvcApplication2.Models
 {
+    [Lind.DI.Component]
     public class UserInfo : Lind.Authorization.IUserDetails
     {
         public long Id { get; set; }

@@ -7,7 +7,8 @@ namespace MvcApplication2.DITest
 	{
 		void WriteLine(String line);
 	}
-	public class DefaultLogger : ILogger
+    [Lind.DI.Component]
+    public class DefaultLogger : ILogger
 	{
 		public void WriteLine(string line)
 		{

@@ -15,13 +15,11 @@ namespace MvcApplication2.Controllers
 	{
 		[Lind.DI.Injection]
 		IProductService productService;
-		IUserInfoService userInfoService;
-		ILogger logger;
-		public TestController(IUserInfoService userInfoService, ILogger logger)
-		{
-			this.userInfoService = userInfoService;
-			this.logger = logger;
-		}
+        [Lind.DI.Injection]
+        IUserInfoService userInfoService;
+        [Lind.DI.Injection]
+        ILogger logger;
+		
 		public ActionResult DI()
 		{
 			return Content(productService.getProductName());	
