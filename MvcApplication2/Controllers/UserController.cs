@@ -1,4 +1,5 @@
-﻿using MvcApplication2.Models;
+﻿using MvcApplication2.DTO;
+using MvcApplication2.Models;
 using MvcApplication2.Service;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,12 @@ namespace MvcApplication2.Controllers
         public List<UserInfo> getUser()
         {
             return userInfoRepository.GetUserInfos();
+        }
+
+        public void CreateUser()
+        {
+            CreateUser createUser = new CreateUser("zzl","male");
+            createUser.ValidName();
         }
     }
 }
